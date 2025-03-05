@@ -1,0 +1,50 @@
+{
+    "The Matrix": {
+        "year": 1999,
+        "rating": 8.7,
+        "poster_url": "https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_id": "tt0133093"
+    },
+    "Inception": {
+        "year": 2010,
+        "rating": 8.8,
+        "poster_url": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+        "imdb_id": "tt1375666"
+    },
+    "The Green Mile": {
+        "year": 1999,
+        "rating": 8.6,
+        "poster_url": "https://m.media-amazon.com/images/M/MV5BMTUxMzQyNjA5MF5BMl5BanBnXkFtZTYwOTU2NTY3._V1_SX300.jpg",
+        "imdb_id": "tt0120689"
+    },
+    "Pulp Fiction": {
+        "year": 1994,
+        "rating": 8.9,
+        "poster_url": "https://m.media-amazon.com/images/M/MV5BYTViYTE3ZGQtNDBlMC00ZTAyLTkyODMtZGRiZDg0MjA2YThkXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_id": "tt0110912"
+    },
+    "The Shining": {
+        "year": 1980,
+        "rating": 8.4,
+        "poster_url": "https://m.media-amazon.com/images/M/MV5BNmM5ZThhY2ItOGRjOS00NzZiLWEwYTItNDgyMjFkOTgxMmRiXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_id": "tt0081505"
+    },
+    "The Hobbit": {
+        "year": 1977,
+        "rating": 6.7,
+        "poster_url": "https://m.media-amazon.com/images/M/MV5BYTJhODI1YjMtYjc0Ni00YTcyLTgxNjYtMzYzNDllZWI1ZTI0XkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_id": "tt0077687"
+    },
+    "The Godfather": {
+        "year": 1972,
+        "rating": 9.2,
+        "poster_url": "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_id": "tt0068646"
+    },
+    "Avatar": {
+        "year": 2009,
+        "rating": 7.9,
+        "poster_url": "https://m.media-amazon.com/images/M/MV5BMDEzMmQwZjctZWU2My00MWNlLWE0NjItMDJlYTRlNGJiZjcyXkEyXkFqcGc@._V1_SX300.jpg",
+        "imdb_id": "tt0499549"
+    }
+}
