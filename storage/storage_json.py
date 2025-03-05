@@ -2,8 +2,11 @@ import json
 import os
 
 class StorageJson:
-    def __init__(self, filename):
+    def __init__(self, filename): # entfernt Standardwert
         self.filename = filename
+        storage_dir = os.path.dirname(self.filename)
+        if not os.path.exists(storage_dir):
+            os.makedirs(storage_dir)
         if not os.path.exists(self.filename):
             self._save_movies({})
 

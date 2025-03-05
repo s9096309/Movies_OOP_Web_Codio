@@ -8,11 +8,30 @@ import random
 load_dotenv()
 
 class MovieApp:
+    """
+    A class to manage a movie application.
+    """
+
     def __init__(self, storage):
+        """
+        Initializes the MovieApp with a storage object and API key.
+
+        Args:
+            storage (Storage): The storage object for movie data.
+        """
         self._storage = storage
         self.api_key = os.getenv("OMDB_API_KEY")
 
     def _extract_year(self, year_str):
+        """
+        Extracts the year from a year string.
+
+        Args:
+            year_str (str): The year string to extract from.
+
+        Returns:
+            int: The extracted year, or None if invalid.
+        """
         try:
             return int(year_str.split('–')[0])
         except ValueError:
@@ -20,6 +39,7 @@ class MovieApp:
             return None
 
     def _command_list_movies(self):
+        """Lists all movies in the storage."""
         movies = self._storage.list_movies()
         if not movies:
             print("No movies found.")
@@ -34,6 +54,7 @@ class MovieApp:
                 print(f"{title}: {rating} ({year}) - Poster: None")
 
     def _command_add_movie(self):
+        """Adds a movie to the storage using the OMDb API."""
         title = input("Enter the movie title: ")
         if not self.api_key:
             print("Error: OMDB API key is missing!")
@@ -65,11 +86,13 @@ class MovieApp:
             print(f"Error: Could not decode JSON response: {e}")
 
     def _command_delete_movie(self):
+        """Deletes a movie from the storage."""
         title = input("Enter movie title to delete: ")
         self._storage.delete_movie(title)
         print(f"Movie '{title}' deleted successfully.")
 
     def _command_movie_stats(self):
+        """Calculates and displays movie statistics."""
         movies = self._storage.list_movies()
         if not movies:
             print("No movies to calculate stats.")
@@ -89,6 +112,7 @@ class MovieApp:
         print(f"  Worst movie: {worst_movie[0]}, {worst_movie[1]['rating']}")
 
     def _command_generate_website(self):
+        """Generates a website from the movie data."""
         try:
             template_dir = os.path.join(os.path.dirname(__file__), "templates")
             env = Environment(loader=FileSystemLoader(template_dir))
@@ -119,6 +143,7 @@ class MovieApp:
             print(f"An error occurred: {e}")
 
     def _command_random_movie(self):
+        """Selects and displays a random movie."""
         movies = self._storage.list_movies()
         if not movies:
             print("No movies in the database.")
@@ -130,6 +155,7 @@ class MovieApp:
         print(f"Your movie for tonight: {random_movie_title}, it's rated {random_movie['rating']}")
 
     def _command_search_movie(self):
+        """Searches for movies by title."""
         search_term = input("Enter search term: ").lower()
         movies = self._storage.list_movies()
         found_movies = []
@@ -144,6 +170,7 @@ class MovieApp:
             print("No movies found.")
 
     def _command_sort_movies(self):
+        """Sorts movies by rating."""
         movies = self._storage.list_movies()
         if not movies:
             print("No movies to sort.")
@@ -161,6 +188,7 @@ class MovieApp:
             print(f"{title}: {movie['rating']} ({movie['year']})")
 
     def run(self):
+        """Runs the movie application."""
         while True:
             print("\n*** Movie App Menu ***")
             print("1. List movies")

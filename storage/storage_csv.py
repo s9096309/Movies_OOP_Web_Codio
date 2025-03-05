@@ -2,7 +2,7 @@ import os
 import csv
 
 class StorageCsv:
-    def __init__(self, file_path):
+    def __init__(self, file_path="storage/movies.csv"): #Hier anpassen
         self.file_path = file_path
 
     def list_movies(self):

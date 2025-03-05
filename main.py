@@ -1,10 +1,12 @@
-from movie_app import MovieApp
+import os
 from storage.storage_json import StorageJson
+from storage.storage_csv import StorageCsv
+from movie_app import MovieApp
 
 def main():
     username = input("Enter your username: ")
-    file_path = f"{username}.json"  # Use the username to create a unique file path
-    storage = StorageJson(file_path)
+    filename = os.path.join("storage", f"{username}.csv")
+    storage = StorageCsv(filename)
     movie_app = MovieApp(storage)
     movie_app.run()
 
