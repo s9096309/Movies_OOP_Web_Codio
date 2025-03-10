@@ -88,8 +88,9 @@ class MovieApp:
     def _command_delete_movie(self):
         """Deletes a movie from the storage."""
         title = input("Enter movie title to delete: ")
-        self._storage.delete_movie(title)
-        print(f"Movie '{title}' deleted successfully.")
+
+        if self._storage.delete_movie(title):
+            print(f"Movie '{title}' deleted successfully.")
 
     def _command_movie_stats(self):
         """Calculates and displays movie statistics."""
@@ -102,14 +103,20 @@ class MovieApp:
 
         avg_rating = sum(ratings) / len(ratings)
         median_rating = statistics.median(ratings)
-        best_movie = max(movies.items(), key=lambda item: item[1]['rating'])
-        worst_movie = min(movies.items(), key=lambda item: item[1]['rating'])
+
+        # Find best movies
+        max_rating = max(ratings)
+        best_movies = [title for title, movie in movies.items() if movie['rating'] == max_rating]
+
+        # Find worst movies
+        min_rating = min(ratings)
+        worst_movies = [title for title, movie in movies.items() if movie['rating'] == min_rating]
 
         print("\nMovie Stats:")
         print(f"  Average rating: {avg_rating:.2f}")
         print(f"  Median rating: {median_rating}")
-        print(f"  Best movie: {best_movie[0]}, {best_movie[1]['rating']}")
-        print(f"  Worst movie: {worst_movie[0]}, {worst_movie[1]['rating']}")
+        print(f"  Best movie(s): {', '.join([f'{movie}, {movies[movie]['rating']}' for movie in best_movies])}")
+        print(f"  Worst movie(s): {', '.join([f'{movie}, {movies[movie]['rating']}' for movie in worst_movies])}")
 
     def _command_generate_website(self):
         """Generates a website from the movie data."""
@@ -125,7 +132,7 @@ class MovieApp:
                 return
 
             # Add 'title' key to each movie dictionary
-            movie_grid = []
+            movie_grid = [] # Initialize movie_grid as an empty list
             for title, movie_data in movies:
                 movie_data['title'] = title  # Add the title to the dictionary
                 movie_grid.append(movie_data)
@@ -186,6 +193,26 @@ class MovieApp:
         print("Sorted movies:")
         for title, movie in sorted_movies:
             print(f"{title}: {movie['rating']} ({movie['year']})")
+    def _command_update_movie(self):
+            """Updates an existing movie in the storage."""
+            title = input("Enter the title of the movie to update: ")
+            movie = self._storage.list_movies().get(title)
+            if not movie:
+                print(f"Movie '{title}' not found.")
+                return
+
+            print(f"Current details for '{title}':")
+            print(f"Year: {movie['year']}, Rating: {movie['rating']}")
+
+            try:
+                new_title = input("Enter new title (leave blank to keep current): ") or title
+                new_year = int(input("Enter new year (leave blank to keep current): ") or movie['year'])
+                new_rating = float(input("Enter new rating (leave blank to keep current): ") or movie['rating'])
+
+                self._storage.update_movie(title, new_title, new_year, new_rating)
+                print(f"Movie '{title}' updated successfully.")
+            except ValueError:
+                print("Invalid input. Please enter a valid year and rating.")
 
     def run(self):
         """Runs the movie application."""
@@ -199,9 +226,10 @@ class MovieApp:
             print("6. Random movie")
             print("7. Search movie")
             print("8. Movies sorted by rating")
+            print("9. Update movie")  # Added update movie
             print("0. Exit")
 
-            choice = input("Enter your choice (0-8): ")
+            choice = input("Enter your choice (0-9): ")  # Modified input range
             if choice == "1":
                 self._command_list_movies()
             elif choice == "2":
@@ -218,6 +246,8 @@ class MovieApp:
                 self._command_search_movie()
             elif choice == "8":
                 self._command_sort_movies()
+            elif choice == "9":  # Added update movie
+                self._command_update_movie()
             elif choice == "0":
                 print("Exiting the movie app.")
                 break
